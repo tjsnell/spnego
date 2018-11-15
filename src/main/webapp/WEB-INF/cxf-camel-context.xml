@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:cxf="http://camel.apache.org/schema/cxf"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:sec="http://cxf.apache.org/configuration/security"
+       xmlns:http-conf="http://cxf.apache.org/transports/http/configuration"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd
+                           http://cxf.apache.org/configuration/security http://cxf.apache.org/schemas/configuration/security.xsd
+                           http://cxf.apache.org/transports/http/configuration http://cxf.apache.org/schemas/configuration/http-conf.xsd
+                           http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+    <http-conf:conduit name="{http://example.com/}HelloWorldServicePort.http-conduit">
+        <http-conf:authorization>
+            <sec:AuthorizationType>Negotiate</sec:AuthorizationType>
+            <sec:Authorization>CXFClient</sec:Authorization>
+        </http-conf:authorization>
+    </http-conf:conduit>
+
+    <cxf:cxfEndpoint
+            id="cxfConsumer"
+            address="http://localhost:8080/spnego-demo/cxf/greeting-security-basic"
+            serviceClass="org.jboss.test.GreetingService">
+
+    </cxf:cxfEndpoint>
+
+    <cxf:cxfEndpoint
+            id="cxfProducer"
+            address="http://localhost:8080/spnego-demo/cxf/greeting-security-basic"
+            serviceClass="org.jboss.test.GreetingService">
+
+    </cxf:cxfEndpoint>
+
+    <bean class="org.jboss.test.GreetingsProcessor" id="greetingsProcessor"/>
+
+    <camelContext id="cxfws-secure-camel-context" xmlns="http://camel.apache.org/schema/spring">
+        <!--
+             This route defines a CXF producer endpoint which invokes a greeting web service.
+
+             CamelCxfWsServlet sends the required message and name parameters to the service by populating them
+             within the message exchange body.
+        -->
+        <route id="route1">
+            <from id="from1" uri="direct:start"/>
+            <to id="to1" uri="cxf:bean:cxfProducer"/>
+        </route>
+
+        <!--
+            This route defines a CXF consumer endpoint which handles requests made to the greeting web service.
+
+            GreetingsProcessor constructs a String greeting response to return back to the JAX-WS client.
+        -->
+        <route id="route2">
+            <from id="from2" uri="cxf:bean:cxfConsumer"/>
+            <process id="process1" ref="greetingsProcessor"/>
+        </route>
+    </camelContext>
+</beans>

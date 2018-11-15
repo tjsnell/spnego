@@ -1,0 +1,14 @@
+*.class
+.classpath
+*.iml
+*.ipr
+*.iws
+.idea
+.DS_Store
+.project
+.settings
+# Package Files #
+*.jar
+*.war
+*.ear
+target
