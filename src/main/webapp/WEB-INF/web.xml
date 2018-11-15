@@ -24,7 +24,7 @@
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>CXF Protected</web-resource-name>
-            <url-pattern>/cxf/*</url-pattern>
+            <url-pattern>/xf/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <role-name>Admin</role-name>
