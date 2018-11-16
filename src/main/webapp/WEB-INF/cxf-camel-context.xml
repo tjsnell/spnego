@@ -3,24 +3,20 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:cxf="http://camel.apache.org/schema/cxf"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:sec="http://cxf.apache.org/configuration/security"
-       xmlns:http-conf="http://cxf.apache.org/transports/http/configuration"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                            http://www.springframework.org/schema/beans/spring-beans.xsd
                            http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd
-                           http://cxf.apache.org/configuration/security http://cxf.apache.org/schemas/configuration/security.xsd
-                           http://cxf.apache.org/transports/http/configuration http://cxf.apache.org/schemas/configuration/http-conf.xsd
                            http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
 
     <cxf:cxfEndpoint
             id="cxfConsumer"
-            address="http://localhost:8080/webservices/greeting-security-basic"
+            address="http://localhost:8080/webservices/greeting-security-kerberos"
             serviceClass="org.jboss.test.GreetingService">
     </cxf:cxfEndpoint>
 
     <cxf:cxfEndpoint
             id="cxfProducer"
-            address="http://localhost:8080/webservices/greeting-security-basic"
+            address="http://localhost:8080/webservices/greeting-security-kerberos"
             serviceClass="org.jboss.test.GreetingService">
     </cxf:cxfEndpoint>
 
