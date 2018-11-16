@@ -21,13 +21,24 @@
         </auth-constraint>
     </security-constraint>
 
+    <!--Just a way to test if things are working. Not useful-->
+    <!--<security-constraint>-->
+        <!--<web-resource-collection>-->
+            <!--<web-resource-name>CXF Protected</web-resource-name>-->
+            <!--<url-pattern>/cxf/*</url-pattern>-->
+        <!--</web-resource-collection>-->
+        <!--<auth-constraint>-->
+            <!--<role-name>User</role-name>-->
+        <!--</auth-constraint>-->
+    <!--</security-constraint>-->
+
     <security-constraint>
         <web-resource-collection>
-            <web-resource-name>CXF Protected</web-resource-name>
-            <url-pattern>/xf/*</url-pattern>
+            <web-resource-name>Webservices Protected</web-resource-name>
+            <url-pattern>///webservices/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
-            <role-name>Admin</role-name>
+            <role-name>User</role-name>
         </auth-constraint>
     </security-constraint>
 

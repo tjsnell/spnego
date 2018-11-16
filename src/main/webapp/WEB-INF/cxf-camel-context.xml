@@ -12,23 +12,15 @@
                            http://cxf.apache.org/transports/http/configuration http://cxf.apache.org/schemas/configuration/http-conf.xsd
                            http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
 
-    <http-conf:conduit name="{http://test.jboss.org/}greetingPort.http-conduit"
-             xmlns="http://cxf.apache.org/transports/http/configuration">
-        <http-conf:authorization>
-            <sec:AuthorizationType>Negotiate</sec:AuthorizationType>
-            <sec:Authorization>SPNEGO</sec:Authorization>
-        </http-conf:authorization>
-    </http-conf:conduit>
-
     <cxf:cxfEndpoint
             id="cxfConsumer"
-            address="http://localhost:8080/spnego-demo/cxf/greeting-security-basic"
+            address="http://localhost:8080/webservices/greeting-security-basic"
             serviceClass="org.jboss.test.GreetingService">
     </cxf:cxfEndpoint>
 
     <cxf:cxfEndpoint
             id="cxfProducer"
-            address="http://localhost:8080/spnego-demo/cxf/greeting-security-basic"
+            address="http://localhost:8080/webservices/greeting-security-basic"
             serviceClass="org.jboss.test.GreetingService">
     </cxf:cxfEndpoint>
 
